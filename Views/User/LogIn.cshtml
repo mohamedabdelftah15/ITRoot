@@ -1,0 +1,52 @@
+﻿@model ITRoot_Task.Models.LogInUser
+
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<h1 style="margin-bottom:50px;font-weight:700">Log In</h1>
+
+@using (Ajax.BeginForm("LogIn", "User", new AjaxOptions { HttpMethod = "POST", OnSuccess = "LogInSuccess" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoleID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.RoleID, ViewBag.Roles as List<SelectListItem>, new { htmlAttributes = new { @class = "form-control select2"  } })
+                @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                <span id="RoleIDError" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="logInSubmit" onclick="logInValidate()" value="Log In" class="btn btn-primary" style="margin-right:130px" />
+                @Html.ActionLink("Register", "Register", null, new { @class = "btn btn-primary" })
+            </div>
+            </div>
+        </div>
+}
+   
+
+@section Scripts{
+    <script src='~/Scripts/Custom/User.js'></script>
+}

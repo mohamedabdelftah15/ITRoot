@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="display-4 mb-4">Home</h2>
+<div class="row">
+    <div class="col-sm-7">
+        <button type="button" class="btn btn-primary mb-5 userType" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New User</button>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="row">
+            <div class="col-sm-3">
+                <button class="btn btn-primary" onclick="search()">Search</button>
+            </div>
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="searchValue" placeholder="Search" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-2">
+        <div class="form-group">
+            @Html.ActionLink("Export To CSV", "Csv", "User", new { @class = "btn btn-primary ml-5" })
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-hover table-striped text-center" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Full Name
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone
+            </th>
+            <th class="userType"></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-left">
+                <h4 class="modal-title" id="myModalLabel">Add User</h4>
+                <button type="button" class="close" data-dismiss="modal">X</button>
+
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="ID" />
+                    </div>
+                    <div class="form-group">
+                        <label for="FullName">Full Name</label>
+                        <input type="text" class="form-control" id="FullName" placeholder="Full Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="UserName">User Name</label>
+                        <input type="text" class="form-control" id="UserName" placeholder="User Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" id="Password" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" placeholder="Email" />
+                        <span id="EmailError" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone">Phone</label>
+                        <input type="tel" class="form-control" id="Phone" placeholder="Phone" />
+                    </div>
+                    <div class="form-group" >
+                        <label for="Role_ID">User Type</label>
+                        <select class="form-control" id="Role_ID" placeholder="User Type">
+                            <option value="" selected disabled>Select User Type</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src='~/Scripts/Custom/User.js'></script>
+    }
+
+
